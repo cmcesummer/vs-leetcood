@@ -44,36 +44,36 @@
  *
  */
 
-function mid(str) {
-    let i = 1,
-        leng = str.length,
-        cache = [[1, str[0]]];
-    for (; i < leng; i++) {
-        const box = cache[cache.length - 1];
-        if (box[1] == str[i]) {
-            box[0] += 1;
-        } else {
-            cache.push([1, str[i]]);
-        }
-    }
-    return cache.reduce((pre, next) => {
-        return pre + next.join("");
-    }, "");
-}
+// function mid(str) {
+//     let i = 1,
+//         leng = str.length,
+//         cache = [[1, str[0]]];
+//     for (; i < leng; i++) {
+//         const box = cache[cache.length - 1];
+//         if (box[1] == str[i]) {
+//             box[0] += 1;
+//         } else {
+//             cache.push([1, str[i]]);
+//         }
+//     }
+//     return cache.reduce((pre, next) => {
+//         return pre + next.join("");
+//     }, "");
+// }
 
-/**
- * @param {number} n
- * @return {string}
- */
-var countAndSay = function(n) {
-    if (n == 1) return "1";
-    let res = "1";
-    while (n > 1) {
-        res = mid(res);
-        n--;
-    }
-    return res;
-};
+// /**
+//  * @param {number} n
+//  * @return {string}
+//  */
+// var countAndSay = function(n) {
+//     if (n == 1) return "1";
+//     let res = "1";
+//     while (n > 1) {
+//         res = mid(res);
+//         n--;
+//     }
+//     return res;
+// };
 
 // console.log(countAndSay(6));
 // console.log(mid("1"));
@@ -81,3 +81,28 @@ var countAndSay = function(n) {
 // console.log(mid("21"));
 // console.log(mid("1211"));
 // console.log(mid("111221"));
+
+var countAndSay = function(n) {
+    if (n === 1) {
+        return "1";
+    } else if (n > 1) {
+        let str = countAndSay(n - 1);
+        let f;
+        let count = 0;
+        let result = "";
+        str.split("").forEach((s, i, sa) => {
+            if (i === 0) {
+                f = s;
+            }
+            if (s === f) {
+                count++;
+            } else {
+                result += count + f;
+                count = 1;
+                f = s;
+            }
+        });
+        result += count + f;
+        return result;
+    }
+};
