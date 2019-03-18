@@ -36,4 +36,32 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var deleteDuplicates = function(head) {};
+// var deleteDuplicates = function (head) {
+//     const cache = [];
+//     function min(source) {
+//         const node = source.next;
+//         if (!node) return
+//         if (!cache.includes(node.val)) {
+//             cache.push(node.val);
+//             min(node.next);
+//         } else {
+//             source.next = node.next
+//             min(source)
+//         }
+//     }
+//     const next = new ListNode(0);
+//     next.next = head;
+//     min(next);
+//     return next.next
+// };
+var deleteDuplicates = function (head) {
+    if (head === null) return null;
+    var current = head;
+    while (current !== null) {
+        while (current.next !== null && current.val === current.next.val) {
+            current.next = current.next.next;
+        }
+        current = current.next;
+    }
+    return head;
+};
