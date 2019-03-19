@@ -60,7 +60,8 @@
  * @param {TreeNode} q
  * @return {boolean}
  */
-var isSameTree = function(p, q) {
-    
-};
-
+function isSameTree(p, q) {
+    if (!p && !q) return true;
+    if (!p || !q || q.val !== p.val) return false;
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+}
