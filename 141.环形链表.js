@@ -63,7 +63,31 @@
  * @param {ListNode} head
  * @return {boolean}
  */
-var hasCycle = function(head) {
-    
-};
+// var hasCycle = function (head) {
+//     if (!head) return false;
+//     let walker = head;
+//     let runner = head;
+
+//     while (walker.next && (runner.next && runner.next.next)) {
+//         if (walker.next == runner.next.next) {
+//             return true;
+//         }
+//         walker = walker.next;
+//         runner = runner.next.next;
+//     }
+//     return false;
+// };
+
+
+var hasCycle = function (head) {
+    while (head) {
+        if (head.val == 'abcdeffg') {
+            return true
+        } else {
+            head.val = 'abcdeffg';
+        }
+        head = head.next;
+    }
+    return false
+}
 
