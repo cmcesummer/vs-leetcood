@@ -33,16 +33,45 @@
  * @return {number}
  */
 // 内存溢出 存在问题
-var trailingZeroes = function(n) {
-    if (n == 0) return 1;
-    function getNum(n) {
-        if (n == 1) return 1;
-        return n * getNum(n - 1);
-    }
-    const nu = getNum(n) + "";
-    for (let i = nu.length - 1; i >= 0; i--) {
-        if (nu[i] !== "0") {
-            return nu.length - 1 - i;
+// var trailingZeroes = function(n) {
+//     if (n == 0) return 1;
+//     function getNum(n) {
+//         if (n == 1) return 1;
+//         return n * getNum(n - 1);
+//     }
+//     const nu = getNum(n) + "";
+//     for (let i = nu.length - 1; i >= 0; i--) {
+//         if (nu[i] !== "0") {
+//             return nu.length - 1 - i;
+//         }
+//     }
+// };
+
+/**
+ * 阶乘的每个数能被几个5整除，5的个数加起来就是0的个数
+ * @param {*} num
+ */
+var trailingZeroes = function(num) {
+    let count = 0,
+        i = 5;
+    while (i <= num) {
+        count++;
+        let mid = i / 5;
+        while (mid % 5 == 0 && mid > 1) {
+            count++;
+            mid = mid / 5;
         }
+        i += 5;
     }
+    return count;
+};
+
+var trailingZeroes = function(n) {
+    var ans = 0;
+    //count the numbers of 5 in n!
+    //ex. 25, ans = (25/5) + (5/5) = 6
+    for (var i = n; i > 0; i = Math.floor(i / 5)) {
+        ans += Math.floor(i / 5);
+    }
+    return ans;
 };
