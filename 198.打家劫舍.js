@@ -36,12 +36,21 @@
  * @param {number[]} nums
  * @return {number}
  */
-var rob = function(nums) {
-    let on = 0,
-        tw = 0;
-    for (let i = 0, le = nums.length; i < le; i = i + 2) {
-        on += nums[i];
-        tw += nums[i + 1] || 0;
+var rob = function (nums) {
+    const len = nums.length;
+    if (len <= 1) return len ? nums[0] : 0;
+    let on = nums[0],
+        // 这里是关键， 第二个数字必须是他们中大的那个，
+        // 就拿 [2,1,1,2]来说， 第二个数字是 Math.max(2,1), 第四个2才能加到2，而不是1 
+        tw = Math.max(nums[1], nums[0]),
+        max = Math.max(on, tw);
+
+    for (let i = 2; i < len; i++) {
+        max = Math.max(on + nums[i], tw);
+        on = tw;
+        tw = max;
     }
-    return Math.max(on, tw);
+
+    return max;
 };
+// console.log(rob([2, 1, 1, 2]))
