@@ -33,7 +33,21 @@
  * @return {boolean}
  */
 var isHappy = function(n) {
+    const cache = {};
     const cy = n => {
         n = n + "";
+        let count = 0;
+        for (let num of n) {
+            count += (num * 1) ** 2;
+        }
+        if (cache[count]) {
+            return false;
+        }
+        cache[count] = 1;
+        if (count != 1) {
+            return cy(count);
+        }
+        return true;
     };
+    return cy(n);
 };
