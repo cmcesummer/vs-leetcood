@@ -26,5 +26,5 @@ var addStrings = function(num1, num2) {
     }
     return sum;
 };
-console.log(addStrings("5946", "32566"), 5946 + 32566);
+// console.log(addStrings("5946", "32566"), 5946 + 32566);
 // @lc code=end
